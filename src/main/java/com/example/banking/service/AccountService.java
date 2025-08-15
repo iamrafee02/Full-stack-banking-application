@@ -8,37 +8,37 @@ import java.util.List;
 
 @Service
 public class AccountService {
-    private final AccountRepository repo;
+	private final AccountRepository repo;
 
-    public AccountService(AccountRepository repo) {
-        this.repo = repo;
-    }
+	public AccountService(AccountRepository repo) {
+		this.repo = repo;
+	}
 
-    public Account createAccount(Account account) {
-        return repo.save(account);
-    }
+	public Account createAccount(Account account) {
+		return repo.save(account);
+	}
 
-    public List<Account> getAllAccounts() {
-        return repo.findAll();
-    }
+	public List<Account> getAllAccounts() {
+		return repo.findAll();
+	}
 
-    public Account deposit(Long id, double amount) {
-        Account acc = repo.findById(id).orElseThrow();
-        acc.setBalance(acc.getBalance() + amount);
-        return repo.save(acc);
-    }
+	public Account deposit(Long id, double amount) {
+		Account acc = repo.findById(id).orElseThrow();
+		acc.setBalance(acc.getBalance() + amount);
+		return repo.save(acc);
+	}
 
-    public Account withdraw(Long id, double amount) {
-        Account acc = repo.findById(id).orElseThrow();
-        if (acc.getBalance() >= amount) {
-            acc.setBalance(acc.getBalance() - amount);
-        } else {
-            throw new RuntimeException("Insufficient funds!");
-        }
-        return repo.save(acc);
-    }
+	public Account withdraw(Long id, double amount) {
+		Account acc = repo.findById(id).orElseThrow();
+		if (acc.getBalance() >= amount) {
+			acc.setBalance(acc.getBalance() - amount);
+		} else {
+			throw new RuntimeException("Insufficient funds!");
+		}
+		return repo.save(acc);
+	}
 
-    public void deleteAccount(Long id) {
-        repo.deleteById(id);
-    }
+	public void deleteAccount(Long id) {
+		repo.deleteById(id);
+	}
 }
