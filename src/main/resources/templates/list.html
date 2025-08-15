@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accounts</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Bank Accounts</h1>
+    <a href="/accounts/create">➕ Create Account</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Holder</th>
+            <th>Balance</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="acc : ${accounts}">
+            <td th:text="${acc.id}"></td>
+            <td th:text="${acc.accountHolderName}"></td>
+            <td th:text="${acc.balance}"></td>
+            <td>
+                <a th:href="@{/accounts/deposit/{id}(id=${acc.id})}">Deposit</a> |
+                <a th:href="@{/accounts/withdraw/{id}(id=${acc.id})}">Withdraw</a> |
+                <a th:href="@{/accounts/delete/{id}(id=${acc.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
